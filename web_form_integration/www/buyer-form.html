@@ -1,0 +1,120 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    body {
+        background-color: #f4f6f8;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-wrapper {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .form-wrapper h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .form-wrapper p {
+        text-align: center;
+        color: #555;
+    }
+
+    .form-wrapper h3 {
+        margin-top: 30px;
+        color: #34495e;
+        border-bottom: 1px solid #e1e1e1;
+        padding-bottom: 5px;
+    }
+
+    .form-wrapper input[type="text"],
+    .form-wrapper input[type="email"],
+    .form-wrapper input[type="file"],
+    .form-wrapper input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    .form-wrapper label {
+        font-weight: 500;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .form-wrapper input[type="checkbox"] {
+        margin-right: 6px;
+    }
+
+    .form-wrapper button {
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .form-wrapper button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div id="form-container" class="form-wrapper" style="display: none;">
+    <h2>Buyer Form Submission</h2>
+    <p>Dear buyer, please complete your form below.</p>
+
+    <input id="custom_property" placeholder="Property">
+    <input id="custom_company_name" placeholder="Company Name">
+    <input id="custom_company_number" placeholder="Company Number">
+
+    <h3>Buyer 1 Information</h3>
+    <input id="custom_buyer_1_name" placeholder="Buyer 1 Name">
+    <input id="custom_buyer_1_phone" placeholder="Buyer 1 Phone">
+    <input id="custom_buyer_1_email" placeholder="Buyer 1 Email">
+    <label>ID / Passport:</label>
+    <input type="file" id="custom_buyer_1_id_passport">
+    <label>Proof of Address:</label>
+    <input type="file" id="custom_buyer_1_proof_of_address">
+
+    <h3>Buyer 2 Information</h3>
+    <input id="custom_buyer_2_name" placeholder="Buyer 2 Name">
+    <input id="custom_buyer_2_phone" placeholder="Buyer 2 Phone">
+    <input id="custom_buyer_2_email" placeholder="Buyer 2 Email">
+    <label>ID:</label>
+    <input type="file" id="custom_buyer_2_id">
+    <label>Proof of Address:</label>
+    <input type="file" id="custom_buyer_2_proof_of_address">
+
+    <h3>Financial Details</h3>
+    <label>Proof of Funds:</label>
+    <input type="file" id="custom_proof_of_funds">
+
+    <label><input type="checkbox" id="custom_buying_method_cash"> Buying Method: Cash</label>
+    <label><input type="checkbox" id="custom_buying_method_cash_and_bridging_loan"> Buying Method: Cash and Bridging Loan</label>
+
+    <h3>Additional Information</h3>
+    <label><input type="checkbox" id="custom_survery_quote"> Survey Quote</label>
+    <label><input type="checkbox" id="custom_searches_quote"> Searches Quote</label>
+    <label><input type="checkbox" id="custom_intro_to_root_homes_team"> Intro to Root Homes Team</label>
+    <label><input type="checkbox" id="custom_i_have_my_own_solicitor"> I have my own solicitor</label>
+    <label><input type="checkbox" id="custom_different_name_for_order"> Different Name for Order</label>
+
+    <button id="submit-btn">Submit</button>
+</div>
+
+<script src="/assets/web_form_integration/js/buyer_form.js"></script>
+{% endblock %}
