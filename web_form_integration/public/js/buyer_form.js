@@ -25,32 +25,25 @@ frappe.ready(() => {
         const getVal = id => document.getElementById(id)?.value || "";
         const getCheck = id => document.getElementById(id)?.checked || false;
 
-const uploadFile = async (id) => {
-    const fileInput = document.getElementById(id);
-    if (fileInput && fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const sanitizedFileName = file.name.replace(/\s+/g, "_");
+ const uploadFile = async (id) => {
+            const fileInput = document.getElementById(id);
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("is_private", 1);
+                formData.append("doctype", "Opportunity");
+                formData.append("docname", opp);
 
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("filename", sanitizedFileName);
-        formData.append("is_private", 0);
-        formData.append("doctype", "Opportunity");
-        formData.append("docname", opp);
-        formData.append("file_url", `/files/${sanitizedFileName}`);  // ✅ required
-
-        const response = await fetch("/api/method/upload_file", {
-            method: "POST",
-            body: formData
-        });
-
-        const result = await response.json();
-        const url = result.message?.file_url || `/files/${sanitizedFileName}`;
-        console.log("File uploaded:", url);
-        return url;
-    }
-    return "";
-};
+                const response = await fetch("/api/method/upload_file", {
+                    method: "POST",
+                    body: formData
+                });
+                const result = await response.json();
+                return result.message?.file_url || "";
+            }
+            return "";
+        };
 
 
 
