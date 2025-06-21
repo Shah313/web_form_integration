@@ -9,11 +9,6 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
-def get_data():
-    return {
-        "install_requires": ["twilio"]
-    }
-
 # include js, css files in header of desk.html
 # app_include_css = "/assets/web_form_integration/css/web_form_integration.css"
 # app_include_js = "/assets/web_form_integration/js/web_form_integration.js"
