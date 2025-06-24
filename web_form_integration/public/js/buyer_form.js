@@ -1,4 +1,4 @@
-frappe.ready(() => {
+ frappe.ready(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const opp = urlParams.get("opportunity");
     const token = urlParams.get("token");
@@ -24,26 +24,34 @@ frappe.ready(() => {
     document.getElementById("submit-btn").onclick = async () => {
         const getVal = id => document.getElementById(id)?.value || "";
         const getCheck = id => document.getElementById(id)?.checked || false;
+        
 
- const uploadFile = async (id) => {
-            const fileInput = document.getElementById(id);
-            if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const formData = new FormData();
-                formData.append("file", file);
-                formData.append("is_private", 1);
-                formData.append("doctype", "Opportunity");
-                formData.append("docname", opp);
+const uploadFile = async (id) => {
+    const fileInput = document.getElementById(id);
+    if (fileInput && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
 
-                const response = await fetch("/api/method/upload_file", {
-                    method: "POST",
-                    body: formData
-                });
-                const result = await response.json();
-                return result.message?.file_url || "";
-            }
-            return "";
-        };
+        formData.append("is_private", 0);
+        formData.append("doctype", "Opportunity");
+        formData.append("docname", opp);
+
+        const response = await fetch("/api/method/upload_file", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        // This line:
+        const url = result.message?.file_url || `/files/${file.name}`;
+        console.log("File uploaded:", url);  // Good for debugging
+        return url;
+    }
+    return "";
+};
+
 
 
 
