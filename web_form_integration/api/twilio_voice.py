@@ -1,8 +1,7 @@
 import frappe
 import requests
 from frappe import _
-from frappe.utils.response import build_response
-
+from werkzeug.wrappers import Response
 
 @frappe.whitelist()
 def connect_agent_and_customer(agent_number, customer_number):
@@ -16,7 +15,7 @@ def connect_agent_and_customer(agent_number, customer_number):
 
     account_sid = frappe.conf.get("twilio_account_sid")
     auth_token = frappe.conf.get("twilio_auth_token")
-    from_number = frappe.conf.get("twilio_phone_number")
+    from_number = frappe.conf.get("twilio_voice_number")
 
     if not all([account_sid, auth_token, from_number]):
         frappe.throw(_("Twilio credentials missing in site_config.json"))
@@ -41,14 +40,11 @@ def connect_agent_and_customer(agent_number, customer_number):
         return {"status": "success", "sid": sid}
     except requests.exceptions.RequestException as e:
         frappe.log_error(frappe.get_traceback(), "Twilio Connect Call Error")
-        frappe.throw(_("Voice call failed: ") + str(e))
 
 
+        
 @frappe.whitelist(allow_guest=True)
 def generate_twiml(customer_number):
-    """
-    Step 2: Called by Twilio after agent picks up
-    """
     if not customer_number.startswith("+"):
         customer_number = "+" + customer_number.strip()
 
@@ -57,8 +53,8 @@ def generate_twiml(customer_number):
     <Dial>{customer_number}</Dial>
 </Response>
 """
-    return build_response("text/xml", response_xml)
 
+    return Response(response_xml, content_type="text/xml")
 
 @frappe.whitelist()
 def end_call(call_sid):
