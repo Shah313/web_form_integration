@@ -22,9 +22,9 @@ def connect_agent_and_customer(agent_number, customer_number):
 
     url = f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Calls.json"
 
-    callback_url = f"https://roothome.erpnext.com/api/method/web_form_integration.api.twilio_voice.generate_twiml?customer_number={customer_number}"
+    callback_url = f"https://b92a-101-53-224-130.ngrok-free.app/api/method/web_form_integration.api.twilio_voice.generate_twiml?customer_number={customer_number}"
     
-    # print("Generated Callback URL:", callback_url)
+    print("Generated Callback URL:", callback_url)
 
     
     call_data = {
