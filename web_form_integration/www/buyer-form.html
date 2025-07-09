@@ -27,23 +27,8 @@
         color: #555;
     }
 
-    .form-wrapper h3 {
-        margin-top: 30px;
-        color: #34495e;
-        border-bottom: 1px solid #e1e1e1;
-        padding-bottom: 5px;
-    }
-
-    .form-wrapper input[type="text"],
-    .form-wrapper input[type="email"],
-    .form-wrapper input[type="file"],
-    .form-wrapper input[type="number"] {
-        width: 100%;
-        padding: 10px 12px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        box-sizing: border-box;
+    .form-group {
+        margin-bottom: 25px;
     }
 
     .form-wrapper label {
@@ -52,8 +37,27 @@
         margin-top: 10px;
     }
 
+    .form-wrapper input[type="text"],
+    .form-wrapper input[type="email"],
+    .form-wrapper input[type="file"],
+    .form-wrapper input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    .form-wrapper input[type="radio"],
     .form-wrapper input[type="checkbox"] {
-        margin-right: 6px;
+        margin-right: 8px;
+    }
+
+    .form-wrapper .form-description {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 5px;
     }
 
     .form-wrapper button {
@@ -64,7 +68,7 @@
         border: none;
         border-radius: 6px;
         font-size: 16px;
-        margin-top: 20px;
+        margin-top: 30px;
         cursor: pointer;
     }
 
@@ -73,46 +77,122 @@
     }
 </style>
 
-<div id="form-container" class="form-wrapper" style="display: none;">
-    <h2>Buyer Form Submission</h2>
-    <p>Dear buyer, please complete your form below.</p>
+<div id="form-container" class="form-wrapper">
+    <h2>Root Home</h2>
+    <p>Please fill out as much information as possible so we can raise our paperwork and progress the deal for you</p>
 
-    <input id="custom_property" placeholder="Property">
-    <input id="custom_company_name" placeholder="Company Name">
-    <input id="custom_company_number" placeholder="Company Number">
+    <div class="form-group">
+        <label for="custom_property">Property</label>
+        <div class="form-description">Please enter the property being secured</div>
+        <input id="custom_property" type="text">
+    </div>
 
-    <h3>Buyer 1 Information</h3>
-    <input id="custom_buyer_1_name" placeholder="Buyer 1 Name">
-    <input id="custom_buyer_1_phone" placeholder="Buyer 1 Phone">
-    <input id="custom_buyer_1_email" placeholder="Buyer 1 Email">
-    <label>ID / Passport:</label>
-    <input type="file" id="custom_buyer_1_id_passport">
-    
-    <label>Proof of Address:</label>
-    <input type="file" id="custom_buyer_1_proof_of_address">
+    <div class="form-group">
+        <label for="custom_company_name">Company Name</label>
+        <div class="form-description">Please confirm the buying company name, if you are using one</div>
+        <input id="custom_company_name" type="text">
+    </div>
 
-    <h3>Buyer 2 Information</h3>
-    <input id="custom_buyer_2_name" placeholder="Buyer 2 Name">
-    <input id="custom_buyer_2_phone" placeholder="Buyer 2 Phone">
-    <input id="custom_buyer_2_email" placeholder="Buyer 2 Email">
-    <label>ID:</label>
-    <input type="file" id="custom_buyer_2_id">
-    <label>Proof of Address:</label>
-    <input type="file" id="custom_buyer_2_proof_of_address">
+    <div class="form-group">
+        <label for="custom_company_number">Company Number</label>
+        <div class="form-description">Please confirm the buying company number, if you are using one and it is available</div>
+        <input id="custom_company_number" type="text">
+    </div>
 
-    <h3>Financial Details</h3>
-    <label>Proof of Funds:</label>
-    <input type="file" id="custom_proof_of_funds">
+    <div class="form-group">
+        <label for="custom_buyer_1_name">Buyer 1 Name</label>
+        <div class="form-description">Please enter the full name of the primary point of contact for this purchase</div>
+        <input id="custom_buyer_1_name" type="text">
+    </div>
 
-    <label><input type="checkbox" id="custom_buying_method_cash"> Buying Method: Cash</label>
-    <label><input type="checkbox" id="custom_buying_method_cash_and_bridging_loan"> Buying Method: Cash and Bridging Loan</label>
+    <div class="form-group">
+        <label for="custom_buyer_1_phone">Buyer 1 Phone</label>
+        <div class="form-description">Please enter the mobile phone number of the primary point of contact, including any international codes eg: +44</div>
+        <input id="custom_buyer_1_phone" type="text">
+    </div>
 
-    <h3>Additional Information</h3>
-    <label><input type="checkbox" id="custom_survery_quote"> Survey Quote</label>
-    <label><input type="checkbox" id="custom_searches_quote"> Searches Quote</label>
-    <label><input type="checkbox" id="custom_intro_to_root_homes_team"> Intro to Root Homes Team</label>
-    <label><input type="checkbox" id="custom_i_have_my_own_solicitor"> I have my own solicitor</label>
-    <label><input type="checkbox" id="custom_different_name_for_order"> Different Name for Order</label>
+    <div class="form-group">
+        <label for="custom_buyer_1_email">Buyer 1 Email</label>
+        <div class="form-description">Please enter the email of the primary point of contact</div>
+        <input id="custom_buyer_1_email" type="email">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_1_id_passport">Buyer 1 ID</label>
+        <div class="form-description">Please upload a scanned image of your passport for our AML compliance</div>
+        <input type="file" id="custom_buyer_1_id_passport">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_1_proof_of_address">Buyer 1 Proof of Address</label>
+        <div class="form-description">Please upload a scanned image of a bank statement or utility bill in your name for our AML compliance</div>
+        <input type="file" id="custom_buyer_1_proof_of_address">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_2_name">Buyer 2 Name</label>
+        <div class="form-description">Please enter the full name of the next point of contact for this purchase</div>
+        <input id="custom_buyer_2_name" type="text">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_2_phone">Buyer 2 Phone</label>
+        <div class="form-description">Please enter the mobile phone number of the next point of contact, including any international codes eg: +44</div>
+        <input id="custom_buyer_2_phone" type="text">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_2_email">Buyer 2 Email</label>
+        <div class="form-description">Please enter the email of the next point of contact</div>
+        <input id="custom_buyer_2_email" type="email">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_2_id">Buyer 2 ID</label>
+        <div class="form-description">Please upload a scanned image of your passport for our AML compliance</div>
+        <input type="file" id="custom_buyer_2_id">
+    </div>
+
+    <div class="form-group">
+        <label for="custom_buyer_2_proof_of_address">Buyer 2 Proof of Address</label>
+        <div class="form-description">Please upload a scanned image of a bank statement or utility bill in your name for our AML compliance</div>
+        <input type="file" id="custom_buyer_2_proof_of_address">
+    </div>
+
+    <div class="form-group">
+        <label>Buying Method</label>
+        <div class="form-description">Please confirm whether you will be purchasing solely using cash, or also using a bridging loan</div>
+        <label><input type="radio" name="buying_method" id="custom_buying_method_cash"> Cash</label>
+        <label><input type="radio" name="buying_method" id="custom_buying_method_cash_and_bridging_loan"> Cash & Bridging Loan</label>
+    </div>
+
+    <div class="form-group">
+        <label for="custom_proof_of_funds">Proof of Funds</label>
+        <div class="form-description">Please provide a proof of funds dated in the last 3 months showing the cash being used in the purchase</div>
+        <input type="file" id="custom_proof_of_funds">
+    </div>
+
+    <div class="form-group">
+        <label><input type="checkbox" id="custom_survery_quote"> Survey Quote</label>
+        <div class="form-description">Please confirm whether you would like us to arrange a quotation for survey (level 2 RICS being our go-to)</div>
+    </div>
+
+    <div class="form-group">
+        <label><input type="checkbox" id="custom_searches_quote"> Searches Quote</label>
+        <div class="form-description">We advocate the use of private searches which are often cheaper and will expedite the transaction. Please confirm if you would also like us to arrange a quote for searches.</div>
+    </div>
+
+    <div class="form-group">
+        <label>Legal Team</label>
+        <div class="form-description">This transaction is currently parked with our legal team who are best positioned to expedite. If you're happy using our team please confirm and we will make the necessary introductions</div>
+        <label><input type="radio" name="legal_team" id="custom_intro_to_root_homes_team"> Intro to Root Home's team</label>
+        <label><input type="radio" name="legal_team" id="custom_i_have_my_own_solicitor"> I have my own solicitor</label>
+    </div>
+
+    <div class="form-group">
+        <label><input type="checkbox" id="custom_different_name_for_order"> Different Name for Order?</label>
+        <div class="form-description">Would you like us to prepare our Quote/Order for our services under a different name to the Buying Company for Invoicing purposes?</div>
+    </div>
 
     <button id="submit-btn">Submit</button>
 </div>

@@ -9,6 +9,22 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
+# from web_form_integration.api.twilio_browser import twilio_outgoing
+
+# def after_migrate():
+#     from frappe.app import application
+#     application.add_url_rule('/twilio/outgoing', 'twilio_outgoing', twilio_outgoing, methods=['POST'])
+
+
+
+# routes = [
+#     {"rule": "/twilio/outgoing", "options": {"methods": ["POST"]}, "endpoint": "twilio_outgoing"},
+#     {"rule": "/twilio/incoming", "options": {"methods": ["POST"]}, "endpoint": "twilio_incoming"},
+# ]
+
+
+
+
 # include js, css files in header of desk.html
 # app_include_css = "/assets/web_form_integration/css/web_form_integration.css"
 # app_include_js = "/assets/web_form_integration/js/web_form_integration.js"
