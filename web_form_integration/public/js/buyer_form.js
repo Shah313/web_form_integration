@@ -78,41 +78,54 @@ if (fileInfo && fileInfo.file_url) {
 
 
 
+// Step 1: trigger all uploads in parallel
+const [
+    file1, file2, file3, file4, file5, file6
+] = await Promise.all([
+    uploadFile("custom_buyer_1_id_passport"),
+    uploadFile("custom_buyer_1_proof_of_address"),
+    uploadFile("custom_buyer_2_id"),
+    uploadFile("custom_buyer_2_proof_of_address"),
+    uploadFile("custom_proof_of_funds"),
+]);
 
-  const data = {
-            custom_property: getVal("custom_property"),
-            custom_company_name: getVal("custom_company_name"),
-            custom_company_number: getVal("custom_company_number"),
-            custom_buyer_1_name: getVal("custom_buyer_1_name"),  
-            custom_buyer_1_phone: getVal("custom_buyer_1_phone"),   
-            custom_buyer_1_email: getVal("custom_buyer_1_email"),
-            custom_buyer_1_id_passport: await uploadFile("custom_buyer_1_id_passport"),
-            custom_buyer_1_proof_of_address: await uploadFile("custom_buyer_1_proof_of_address"),
+// Step 2: construct data
+const data = {
+    custom_property: getVal("custom_property"),
+    custom_company_name: getVal("custom_company_name"),
+    custom_company_number: getVal("custom_company_number"),
 
-            custom_buyer_2_name: getVal("custom_buyer_2_name"),  
-            custom_buyer_2_phone: getVal("custom_buyer_2_phone"),   
-            custom_buyer_2_email: getVal("custom_buyer_2_email"),
-            custom_buyer_2_id: await uploadFile("custom_buyer_2_id"),
-            custom_buyer_2_proof_of_address: await uploadFile("custom_buyer_2_proof_of_address"),
-            
-            custom_buying_method_cash: getCheck("custom_buying_method_cash") ? 1 : 0,
-            custom_buying_method_cash_and_bridging_loan: getCheck("custom_buying_method_cash_and_bridging_loan") ? 1 : 0,
-            custom_proof_of_funds: await uploadFile("custom_proof_of_funds"),
-            
-            custom_survery_quote: getCheck("custom_survery_quote") ? 1 : 0,
-            custom_searches_quote__: getCheck("custom_searches_quote__") ? 1 : 0,
-            custom_intro_to_root_homes_team: getCheck("custom_intro_to_root_homes_team") ? 1 : 0,
-            custom_i_have_my_own_solicitor: getCheck("custom_i_have_my_own_solicitor") ? 1 : 0,
-            
-            // New solicitor fields added here
-            custom_solicitor_name: getVal("custom_solicitor_name"),
-            custom_solicitor_phone: getVal("custom_solicitor_phone"),
-            custom_solicitor_email: getVal("custom_solicitor_email"),
-            custom_solicitor_firm: getVal("custom_solicitor_firm"),
-            custom_solicitor_address: getVal("custom_solicitor_address"),
-            
-            custom_different_name: getCheck("custom_different_name") ? 1 : 0,
-        };
+    custom_buyer_1_name: getVal("custom_buyer_1_name"),
+    custom_buyer_1_phone: getVal("custom_buyer_1_phone"),
+    custom_buyer_1_email: getVal("custom_buyer_1_email"),
+
+    custom_buyer_1_id_passport: file1,
+    custom_buyer_1_proof_of_address: file2,
+
+    custom_buyer_2_name: getVal("custom_buyer_2_name"),
+    custom_buyer_2_phone: getVal("custom_buyer_2_phone"),
+    custom_buyer_2_email: getVal("custom_buyer_2_email"),
+
+    custom_buyer_2_id: file3,
+    custom_buyer_2_proof_of_address: file4,
+    custom_proof_of_funds: file5,
+
+    custom_buying_method_cash: getCheck("custom_buying_method_cash") ? 1 : 0,
+    custom_buying_method_cash_and_bridging_loan: getCheck("custom_buying_method_cash_and_bridging_loan") ? 1 : 0,
+
+    custom_survery_quote: getCheck("custom_survery_quote") ? 1 : 0,
+    custom_searches_quote__: getCheck("custom_searches_quote__") ? 1 : 0,
+    custom_intro_to_root_homes_team: getCheck("custom_intro_to_root_homes_team") ? 1 : 0,
+    custom_i_have_my_own_solicitor: getCheck("custom_i_have_my_own_solicitor") ? 1 : 0,
+
+    custom_solicitor_name: getVal("custom_solicitor_name"),
+    custom_solicitor_phone: getVal("custom_solicitor_phone"),
+    custom_solicitor_email: getVal("custom_solicitor_email"),
+    custom_solicitor_firm: getVal("custom_solicitor_firm"),
+    custom_solicitor_address: getVal("custom_solicitor_address"),
+
+    custom_different_name: getCheck("custom_different_name") ? 1 : 0,
+};
 
 
         frappe.call({
