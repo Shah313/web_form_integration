@@ -5,7 +5,7 @@ import json
 @frappe.whitelist(allow_guest=True)
 def validate_token(opportunity_name, access_token):
     doc = frappe.get_doc("Opportunity", opportunity_name)
-    if doc.state != access_token:
+    if doc.custom_access_token != access_token:
         frappe.throw("Invalid or expired access token.")
     return {"status": "valid"}
 
@@ -17,7 +17,7 @@ def validate_token(opportunity_name, access_token):
 def update_opportunity_data(opportunity_name, access_token, data):
     doc = frappe.get_doc("Opportunity", opportunity_name)
 
-    if doc.state != access_token:
+    if doc.custom_access_token != access_token:
         frappe.throw("Invalid or expired token.")
 
     # ✅ Convert JSON string to dict
@@ -26,6 +26,6 @@ def update_opportunity_data(opportunity_name, access_token, data):
     for fieldname, value in parsed_data.items():
         doc.set(fieldname, value)
 
-    doc.state = ""  # Optional: prevent reuse
+    doc.custom_access_token = ""  # Optional: prevent reuse
     doc.save(ignore_permissions=True)
     return {"status": "success"}

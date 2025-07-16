@@ -75,6 +75,41 @@
     .form-wrapper button:hover {
         background-color: #0056b3;
     }
+
+  .solicitor-fields {
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    
+
+.input-wrapper {
+    position: relative;
+    overflow: visible;
+}
+
+.input-wrapper .remove-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: #e74c3c;
+    font-weight: bold;
+    background-color: white;
+    padding: 0 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+}
+
+.input-wrapper:hover .remove-icon {
+    display: block;
+}
+
+
+
 </style>
 
 <div id="form-container" class="form-wrapper">
@@ -120,13 +155,19 @@
     <div class="form-group">
         <label for="custom_buyer_1_id_passport">Buyer 1 ID</label>
         <div class="form-description">Please upload a scanned image of your passport for our AML compliance</div>
-        <input type="file" id="custom_buyer_1_id_passport">
+         <div class="input-wrapper">
+       <input type="file" id="custom_buyer_1_id_passport" class="file-input" data-name="custom_buyer_1_id_passport">
+        <span class="remove-icon" title="Remove file">&times;</span>
+  </div>
     </div>
 
     <div class="form-group">
         <label for="custom_buyer_1_proof_of_address">Buyer 1 Proof of Address</label>
         <div class="form-description">Please upload a scanned image of a bank statement or utility bill in your name for our AML compliance</div>
-        <input type="file" id="custom_buyer_1_proof_of_address">
+         <div class="input-wrapper">
+       <input type="file" id="custom_buyer_1_proof_of_address" class="file-input" data-name="custom_buyer_1_proof_of_address">
+        <span class="remove-icon" title="Remove file">&times;</span>
+  </div>
     </div>
 
     <div class="form-group">
@@ -150,13 +191,19 @@
     <div class="form-group">
         <label for="custom_buyer_2_id">Buyer 2 ID</label>
         <div class="form-description">Please upload a scanned image of your passport for our AML compliance</div>
-        <input type="file" id="custom_buyer_2_id">
+        <div class="input-wrapper">
+      <input type="file" id="custom_buyer_2_id" class="file-input" data-name="custom_buyer_2_id">
+        <span class="remove-icon" title="Remove file">&times;</span>
+  </div>
     </div>
 
     <div class="form-group">
         <label for="custom_buyer_2_proof_of_address">Buyer 2 Proof of Address</label>
         <div class="form-description">Please upload a scanned image of a bank statement or utility bill in your name for our AML compliance</div>
-        <input type="file" id="custom_buyer_2_proof_of_address">
+        <div class="input-wrapper">
+       <input type="file" id="custom_buyer_2_proof_of_address" class="file-input" data-name="custom_buyer_2_proof_of_address">
+        <span class="remove-icon" title="Remove file">&times;</span>
+  </div>
     </div>
 
     <div class="form-group">
@@ -169,7 +216,10 @@
     <div class="form-group">
         <label for="custom_proof_of_funds">Proof of Funds</label>
         <div class="form-description">Please provide a proof of funds dated in the last 3 months showing the cash being used in the purchase</div>
-        <input type="file" id="custom_proof_of_funds">
+         <div class="input-wrapper">
+       <input type="file" id="custom_proof_of_funds" class="file-input" data-name="custom_proof_of_funds">
+        <span class="remove-icon" title="Remove file">&times;</span>
+  </div>
     </div>
 
     <div class="form-group">
@@ -178,19 +228,58 @@
     </div>
 
     <div class="form-group">
-        <label><input type="checkbox" id="custom_searches_quote"> Searches Quote</label>
+        <label><input type="checkbox" id="custom_searches_quote__"> Searches Quote</label>
         <div class="form-description">We advocate the use of private searches which are often cheaper and will expedite the transaction. Please confirm if you would also like us to arrange a quote for searches.</div>
     </div>
 
-    <div class="form-group">
-        <label>Legal Team</label>
-        <div class="form-description">This transaction is currently parked with our legal team who are best positioned to expedite. If you're happy using our team please confirm and we will make the necessary introductions</div>
-        <label><input type="radio" name="legal_team" id="custom_intro_to_root_homes_team"> Intro to Root Home's team</label>
-        <label><input type="radio" name="legal_team" id="custom_i_have_my_own_solicitor"> I have my own solicitor</label>
+   <div class="form-group">
+    <label>Legal Team</label>
+    <div class="form-description">This transaction is currently parked with our legal team who are best positioned to expedite. If you're happy using our team please confirm and we will make the necessary introductions</div>
+    <label><input type="radio" name="legal_team" id="custom_intro_to_root_homes_team" value="root_homes"> Intro to Root Home's team</label>
+    <label><input type="radio" name="legal_team" id="custom_i_have_my_own_solicitor" value="own_solicitor"> I have my own solicitor</label>
+</div>
+
+    <!-- New Solicitor Fields Added Here -->
+
+
+
+
+<!-- Solicitor Fields (hidden by default) -->
+    <div class="solicitor-fields" id="solicitor-fields-container">
+        <div class="form-group">
+            <label for="custom_solicitor_name">My Solicitor's Full Name</label>
+            <div class="form-description">Please enter your solicitor's full name</div>
+            <input id="custom_solicitor_name" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="custom_solicitor_phone">My Solicitor's Direct Dial</label>
+            <div class="form-description">Please enter your solicitor's direct phone number</div>
+            <input id="custom_solicitor_phone" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="custom_solicitor_email">My Solicitor's Email</label>
+            <div class="form-description">Please enter your solicitor's email address</div>
+            <input id="custom_solicitor_email" type="email">
+        </div>
+
+        <div class="form-group">
+            <label for="custom_solicitor_firm">My Solicitor's Firm Name</label>
+            <div class="form-description">Please enter your solicitor's firm</div>
+            <input id="custom_solicitor_firm" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="custom_solicitor_address">My Solicitor's Address</label>
+            <div class="form-description">Please enter your solicitor's correspondence address</div>
+            <input id="custom_solicitor_address" type="text">
+        </div>
     </div>
 
+
     <div class="form-group">
-        <label><input type="checkbox" id="custom_different_name_for_order"> Different Name for Order?</label>
+        <label><input type="checkbox" id="custom_different_name"> Different Name for Order?</label>
         <div class="form-description">Would you like us to prepare our Quote/Order for our services under a different name to the Buying Company for Invoicing purposes?</div>
     </div>
 
@@ -198,4 +287,48 @@
 </div>
 
 <script src="/assets/web_form_integration/js/buyer_form.js"></script>
+
+
+<script>
+frappe.ready(function () {
+    const rootHomesOption = document.getElementById("custom_intro_to_root_homes_team");
+    const ownSolicitorOption = document.getElementById("custom_i_have_my_own_solicitor");
+    const solicitorFieldsContainer = document.getElementById("solicitor-fields-container");
+
+    function toggleSolicitorFields() {
+        if (ownSolicitorOption.checked) {
+            solicitorFieldsContainer.style.display = "block";
+        } else {
+            solicitorFieldsContainer.style.display = "none";
+        }
+    }
+
+    rootHomesOption.addEventListener("change", toggleSolicitorFields);
+    ownSolicitorOption.addEventListener("change", toggleSolicitorFields);
+    toggleSolicitorFields();
+
+    // ✅ Working file input and X icon logic
+    document.querySelectorAll(".input-wrapper").forEach(wrapper => {
+        const input = wrapper.querySelector(".file-input");
+        const icon = wrapper.querySelector(".remove-icon");
+
+        // Show or hide X icon on file select
+        input.addEventListener("change", () => {
+            icon.style.display = input.files.length > 0 ? "block" : "none";
+        });
+
+        // Clear file and hide icon
+        icon.addEventListener("click", () => {
+            input.value = "";
+            icon.style.display = "none";
+        });
+    });
+});
+</script>
+
+
+
+
+
+
 {% endblock %}

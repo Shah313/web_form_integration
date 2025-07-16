@@ -7,11 +7,11 @@ import string
 def send_buyer_form_email(opportunity_name, recipient_email):
     doc = frappe.get_doc("Opportunity", opportunity_name)
 
-    if not doc.state:
-        doc.state = ''.join(random.choices(string.ascii_letters + string.digits, k=20))
+    if not doc.custom_access_token:
+        doc.custom_access_token = ''.join(random.choices(string.ascii_letters + string.digits, k=20))
         doc.save()
 
-    link = get_url(f"/buyer-form?opportunity={doc.name}&token={doc.state}")
+    link = get_url(f"/buyer-form?opportunity={doc.name}&token={doc.custom_access_token}")
 
     subject = f"Action Required: Complete Buyer Form for {doc.name}"
     message = f"""
