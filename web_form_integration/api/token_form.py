@@ -14,12 +14,10 @@ def validate_token(opportunity_name, access_token):
 
 
 
-
 @frappe.whitelist(allow_guest=True)
 def update_opportunity_data(opportunity_name, access_token, data):
     import json
 
-    # Load data if sent as JSON string
     if isinstance(data, str):
         data = json.loads(data)
 
@@ -28,13 +26,21 @@ def update_opportunity_data(opportunity_name, access_token, data):
     if doc.custom_access_token != access_token:
         frappe.throw("Invalid or expired access token.")
 
-    # Set the submitted data into Opportunity fields
     for key, value in data.items():
-        doc.set(key, value)
+        try:
+            # If child table, ensure it's a list of dicts
+            if isinstance(value, list):
+                if value and isinstance(value[0], str):
+                    # Skip invalid child table string values
+                    continue
+            doc.set(key, value)
+        except Exception as e:
+            frappe.log_error(f"Error setting field {key} with value {value}: {str(e)}", "Opportunity Web Form Update")
+            continue  # Skip faulty field
 
     doc.save(ignore_permissions=True)
 
-    # ✅ Manually create a Notification Log (bypassing the queue)
+    # Send Notification
     notif = frappe.new_doc("Notification Log")
     notif.update({
         "type": "Alert",
@@ -47,7 +53,6 @@ def update_opportunity_data(opportunity_name, access_token, data):
     })
     notif.insert(ignore_permissions=True)
 
-    # ✅ This will ensure the bell icon updates immediately
     frappe.publish_realtime("notification", after_commit=True)
 
     return {"status": "success"}
