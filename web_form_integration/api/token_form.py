@@ -26,21 +26,33 @@ def update_opportunity_data(opportunity_name, access_token, data):
     if doc.custom_access_token != access_token:
         frappe.throw("Invalid or expired access token.")
 
+    FILE_CHILD_TABLE_MAP = {
+        "custom_buyer_1_id_passport": "buyer_1_id_passport",
+        "custom_buyer_1_proof_of_address": "buyer_1_proof_of_address",
+        "custom_buyer_2_id": "buyer_2_id",
+        "custom_buyer_2_proof_of_address": "buyer_2_proof_of_address",
+        "custom_proof_of_funds": "proof_of_funds"
+    }
+
     for key, value in data.items():
         try:
-            # If child table, ensure it's a list of dicts
-            if isinstance(value, list):
-                if value and isinstance(value[0], str):
-                    # Skip invalid child table string values
-                    continue
-            doc.set(key, value)
+            if key in FILE_CHILD_TABLE_MAP and value:
+                child_field = FILE_CHILD_TABLE_MAP[key]
+                doc.set(key, [])
+                doc.append(key, {child_field: value})
+            elif isinstance(value, str) and value.startswith("/files/"):
+                frappe.logger().info(f"Skipped unmapped file field: {key} → {value}")
+                continue
+            elif isinstance(value, list):
+                continue
+            else:
+                doc.set(key, value)
         except Exception as e:
             frappe.log_error(f"Error setting field {key} with value {value}: {str(e)}", "Opportunity Web Form Update")
-            continue  # Skip faulty field
+            continue
 
     doc.save(ignore_permissions=True)
 
-    # Send Notification
     notif = frappe.new_doc("Notification Log")
     notif.update({
         "type": "Alert",
@@ -56,3 +68,5 @@ def update_opportunity_data(opportunity_name, access_token, data):
     frappe.publish_realtime("notification", after_commit=True)
 
     return {"status": "success"}
+
+
