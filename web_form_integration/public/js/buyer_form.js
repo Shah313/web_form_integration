@@ -91,7 +91,7 @@ const [
 
 // Step 2: construct data
 const data = {
-    custom_property: getVal("custom_property"),
+    
     custom_company_name: getVal("custom_company_name"),
     custom_company_number: getVal("custom_company_number"),
 
@@ -125,6 +125,8 @@ const data = {
     custom_solicitor_address: getVal("custom_solicitor_address"),
 
     custom_different_name: getCheck("custom_different_name") ? 1 : 0,
+
+    custom_different_order_name: getVal("custom_different_order_name"),
 };
 
 
