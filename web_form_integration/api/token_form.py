@@ -69,4 +69,3 @@ def update_opportunity_data(opportunity_name, access_token, data):
 
     return {"status": "success"}
 
-

@@ -7,6 +7,7 @@
         font-family: 'Segoe UI', sans-serif;
     }
 
+
     .form-wrapper {
         max-width: 700px;
         margin: 40px auto;
@@ -15,6 +16,14 @@
         border-radius: 10px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
+
+    .form-wrapper img {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 180px;
+    height: auto;
+}
+
 
     .form-wrapper h2 {
         text-align: center;
@@ -113,12 +122,60 @@
   color: #333;
 }
 
+.buying-method-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.buying-method-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.buying-method-option input[type="radio"] {
+    display: none;
+}
+
+.buying-method-option:hover {
+    border-color: #007bff;
+    background-color: #eef6ff;
+}
+
+.buying-method-option.selected {
+    border-color: #007bff;
+    background-color: #007bff;
+    color: white;
+}
+
+
 
 
 
 </style>
 
-<div id="form-container" class="form-wrapper">
+<form id="buyer-form" class="form-wrapper">
+
+   
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="/assets/web_form_integration/images/RH_LOGO_Reversed.gif" 
+             alt="Root Home Logo" 
+             style="max-width: 200px; height: auto;">
+    </div>
+
+
+
     <h2>Root Home</h2>
     <p>Please fill out as much information as possible so we can raise our paperwork and progress the deal for you</p>
 
@@ -143,26 +200,26 @@
     <div class="form-group">
         <label for="custom_buyer_1_name">Buyer 1 Name</label>
         <div class="form-description">Please enter the full name of the primary point of contact for this purchase</div>
-        <input id="custom_buyer_1_name" type="text">
+        <input id="custom_buyer_1_name" type="text" required>
     </div>
 
     <div class="form-group">
         <label for="custom_buyer_1_phone">Buyer 1 Phone</label>
         <div class="form-description">Please enter the mobile phone number of the primary point of contact, including any international codes eg: +44</div>
-        <input id="custom_buyer_1_phone" type="text">
+        <input id="custom_buyer_1_phone" type="text" required>
     </div>
 
     <div class="form-group">
         <label for="custom_buyer_1_email">Buyer 1 Email</label>
         <div class="form-description">Please enter the email of the primary point of contact</div>
-        <input id="custom_buyer_1_email" type="email">
+        <input id="custom_buyer_1_email" type="email" required>
     </div>
 
-    <div class="form-group">
+     <div class="form-group">
         <label for="custom_buyer_1_id_passport">Buyer 1 ID</label>
         <div class="form-description">Please upload a scanned image of your passport for our AML compliance</div>
          <div class="input-wrapper">
-       <input type="file" id="custom_buyer_1_id_passport" class="file-input" data-name="custom_buyer_1_id_passport" multiple>
+       <input type="file" id="custom_buyer_1_id_passport" class="file-input" data-name="custom_buyer_1_id_passport" multiple required>
         <span class="remove-icon" title="Remove file">&times;</span>
   </div>
     </div>
@@ -171,7 +228,7 @@
         <label for="custom_buyer_1_proof_of_address">Buyer 1 Proof of Address</label>
         <div class="form-description">Please upload a scanned image of a bank statement or utility bill in your name for our AML compliance</div>
          <div class="input-wrapper">
-       <input type="file" id="custom_buyer_1_proof_of_address" class="file-input" data-name="custom_buyer_1_proof_of_address" multiple>
+       <input type="file" id="custom_buyer_1_proof_of_address" class="file-input" data-name="custom_buyer_1_proof_of_address" multiple required>
         <span class="remove-icon" title="Remove file">&times;</span>
   </div>
     </div>
@@ -213,11 +270,24 @@
     </div>
 
     <div class="form-group">
-        <label>Buying Method</label>
-        <div class="form-description">Please confirm whether you will be purchasing solely using cash, or also using a bridging loan</div>
-        <label><input type="radio" name="buying_method" id="custom_buying_method_cash"> Cash</label>
-        <label><input type="radio" name="buying_method" id="custom_buying_method_cash_and_bridging_loan"> Cash & Bridging Loan</label>
+    <label>Buying Method</label>
+    <div class="form-description">
+        Please confirm whether you will be purchasing solely using cash, 
+        or also using a bridging loan
     </div>
+
+    <div class="buying-method-options">
+        <label class="buying-method-option" id="option-cash">
+            <input type="radio" name="buying_method" id="custom_buying_method_cash" value="cash">
+            Cash
+        </label>
+        <label class="buying-method-option" id="option-loan">
+            <input type="radio" name="buying_method" id="custom_buying_method_cash_and_bridging_loan" value="cash_loan">
+            Cash & Bridging Loan
+        </label>
+    </div>
+</div>
+
 
     <div class="form-group">
         <label for="custom_proof_of_funds">Proof of Funds</label>
@@ -237,6 +307,14 @@
         <label><input type="checkbox" id="custom_searches_quote__"> Searches Quote</label>
         <div class="form-description">We advocate the use of private searches which are often cheaper and will expedite the transaction. Please confirm if you would also like us to arrange a quote for searches.</div>
     </div>
+
+    <div class="form-group">
+    <label><input type="checkbox" id="custom_architectural_quote"> Architectural Quote</label>
+    <div class="form-description">
+        Please confirm whether you would like us to arrange a quotation for architectural services.
+    </div>
+</div>
+
 
    <div class="form-group">
     <label>Legal Team</label>
@@ -308,7 +386,7 @@
 
 
     <button id="submit-btn">Submit</button>
-</div>
+</form>
 
 <script src="/assets/web_form_integration/js/buyer_form.js"></script>
 
@@ -385,6 +463,31 @@ if (diffCheckbox) {
     console.error(e);
   }
 })();
+
+// Buying Method Button Toggle
+document.querySelectorAll('.buying-method-option').forEach(option => {
+    option.addEventListener('click', () => {
+        // Remove selected from all
+        document.querySelectorAll('.buying-method-option').forEach(o => o.classList.remove('selected'));
+        // Add selected to clicked one
+        option.classList.add('selected');
+        // Check the hidden radio inside
+        const input = option.querySelector('input[type="radio"]');
+        if (input) input.checked = true;
+    });
+});
+
+
+// Prevent submit if required fields empty
+document.getElementById("buyer-form").addEventListener("submit", function(e) {
+    if (!this.checkValidity()) {
+        e.preventDefault(); // stop submission
+        e.stopPropagation();
+        alert("Please fill in all mandatory fields before submitting.");
+    }
+}, false);
+
+
 
 
 
