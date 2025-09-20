@@ -1,5 +1,9 @@
 {% extends "templates/web.html" %}
 
+
+{% block header %}{% endblock %}   {# removes header #}
+{% block footer %}{% endblock %}   {# removes footer #}
+
 {% block page_content %}
 <style>
     body {
@@ -163,6 +167,7 @@
 
 
 
+
 </style>
 
 <form id="buyer-form" class="form-wrapper">
@@ -309,7 +314,7 @@
     </div>
 
     <div class="form-group">
-    <label><input type="checkbox" id="custom_architectural_quote"> Architectural Quote</label>
+    <label><input type="checkbox" id="custom_architectural_quotee"> Architectural Quote</label>
     <div class="form-description">
         Please confirm whether you would like us to arrange a quotation for architectural services.
     </div>
@@ -499,5 +504,5 @@ document.getElementById("buyer-form").addEventListener("submit", function(e) {
 
 
 
-
 {% endblock %}
+
