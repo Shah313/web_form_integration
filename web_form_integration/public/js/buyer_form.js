@@ -124,7 +124,7 @@ frappe.ready(() => {
             custom_buying_method_cash_and_bridging_loan: getCheck("custom_buying_method_cash_and_bridging_loan") ? 1 : 0,
             custom_survery_quote: getCheck("custom_survery_quote") ? 1 : 0,
             custom_searches_quote__: getCheck("custom_searches_quote__") ? 1 : 0,
-            custom_architectural_quote: getCheck("custom_architectural_quotee") ? 1 : 0,
+            custom_architectural_quotee: getCheck("custom_architectural_quotee") ? 1 : 0,
             custom_intro_to_root_homes_team: getCheck("custom_intro_to_root_homes_team") ? 1 : 0,
             custom_i_have_my_own_solicitor: getCheck("custom_i_have_my_own_solicitor") ? 1 : 0,
             custom_solicitor_name: getVal("custom_solicitor_name"),
