@@ -5,7 +5,7 @@
 {% block footer %}{% endblock %}   {# removes footer #}
 
 {% block page_content %}
-<style>
+ <style>
     body {
         background-color: #f4f6f8;
         font-family: 'Segoe UI', sans-serif;
@@ -43,6 +43,19 @@
     .form-group {
         margin-bottom: 25px;
     }
+
+ /* Red asterisk only for selected mandatory fields */
+label[for="custom_buyer_1_name"]::after,
+label[for="custom_buyer_1_phone"]::after,
+label[for="custom_buyer_1_email"]::after,
+label[for="custom_buyer_1_id_passport"]::after,
+label[for="custom_buyer_1_proof_of_address"]::after {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
+
+
 
     .form-wrapper label {
         font-weight: 500;
