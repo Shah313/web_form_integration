@@ -22,6 +22,12 @@ app_license = "mit"
 #     {"rule": "/twilio/incoming", "options": {"methods": ["POST"]}, "endpoint": "twilio_incoming"},
 # ]
 
+# doc_events = {
+#     "Email Queue": {
+#         "after_insert": "web_form_integration.api.email_queue_auto_send.send_immediately"
+#     }
+# }
+
 
 
 
